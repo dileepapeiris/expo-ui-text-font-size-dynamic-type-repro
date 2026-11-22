@@ -42,6 +42,12 @@ export default function App() {
         <Measured label="RN Text, fontSize 12">
           <Text style={styles.twelve}>{SAMPLE}</Text>
         </Measured>
+
+        <Measured label="RN Text, fontSize 12, allowFontScaling off">
+          <Text style={styles.twelve} allowFontScaling={false}>
+            {SAMPLE}
+          </Text>
+        </Measured>
       </ScrollView>
     </View>
   );
