@@ -70,3 +70,18 @@ Default text size on the left, XXX-large in the middle, accessibility XXX-large 
 Screen recording: `media/bug-text-size.mp4`.
 Per-step screenshots: `media/bug-text-size-0-large.png` through `media/bug-text-size-5-back-to-large.png`.
 Simulator and toolchain details: `media/simulator-ios-version.txt`.
+
+## Cause
+
+`src/universal/Text/index.ios.tsx` turns `textStyle.fontSize` into the `font({ size })` modifier
+and `textStyle.lineHeight` into `lineSpacing(lineHeight - fontSize)`. In
+`ios/Modifiers/FontModifier.swift`, `resolveBaseFont` handles a size with no `family` and no
+`textStyle` by returning `.system(size:weight:design:)`. That is a fixed-size SwiftUI font, which
+Dynamic Type does not scale. The other branches use `relativeTo:` or a text style, which is why
+the row with no `fontSize` grows. The line spacing is a fixed number of points for the same
+reason.
+
+React Native's `Text` multiplies both `fontSize` and `lineHeight` by the current `fontScale`
+unless `allowFontScaling={false}` is set, so the same style scales in one component and not in
+the other. Android's `TextView.kt` passes the values to Compose in `sp`, which scale, so the
+mismatch is iOS only.
