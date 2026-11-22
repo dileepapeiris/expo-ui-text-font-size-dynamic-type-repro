@@ -1,8 +1,11 @@
+import { Host, Text as ExpoUIText } from '@expo/ui';
 import { StatusBar } from 'expo-status-bar';
 import { ReactNode, useState } from 'react';
 import { LayoutChangeEvent, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
 type Size = { width: number; height: number };
+
+const SAMPLE = 'Twelve point text';
 
 function Measured({ label, children }: { label: string; children: ReactNode }) {
   const [size, setSize] = useState<Size | null>(null);
@@ -35,10 +38,15 @@ export default function App() {
         <Text style={styles.scale} allowFontScaling={false}>
           fontScale: {fontScale}
         </Text>
+
+        <Measured label="RN Text, fontSize 12">
+          <Text style={styles.twelve}>{SAMPLE}</Text>
+        </Measured>
       </ScrollView>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -67,5 +75,8 @@ const styles = StyleSheet.create({
   caption: {
     fontSize: 12,
     color: '#888',
+  },
+  twelve: {
+    fontSize: 12,
   },
 });
