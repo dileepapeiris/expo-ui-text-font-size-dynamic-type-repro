@@ -1,0 +1,24 @@
+Recorded 11/23/26 on the iOS Simulator (Xcode 27 DeviceHub).
+
+Host:
+  ProductName:		macOS
+  ProductVersion:		27.2
+  BuildVersion:		26B123
+  Xcode 27.2 Build version 27B52 
+
+Simulator:
+  iPhone 17 Pro (E203D3F7-1E73-4B58-A9AE-9C889E1E6DCA) (Booted) 
+  iOS 26.5 (26.5 - 23F77) - com.apple.CoreSimulator.SimRuntime.iOS-26-5
+  model identifier: iPhone18,1
+  logical screen: 402 x 874 pt, screenshots 1206 x 2622 px (3x)
+
+Project:
+  node v22.23.5, npm 10.9.9
+  expo 58.0.26
+  @expo/ui 58.0.29
+  expo-modules-core 58.1.0
+  react-native 0.88.1
+  react 19.3.0
+  New Architecture: on (SDK 58 default)
+
+Text sizes set with: xcrun simctl ui <udid> content_size <size>
