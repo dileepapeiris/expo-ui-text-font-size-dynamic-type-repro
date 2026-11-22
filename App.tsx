@@ -66,6 +66,12 @@ export default function App() {
             <ExpoUIText>{SAMPLE}</ExpoUIText>
           </Host>
         </Measured>
+
+        <Measured label="Workaround: fontSize 12 × fontScale">
+          <Host matchContents>
+            <ExpoUIText textStyle={{ fontSize: 12 * fontScale }}>{SAMPLE}</ExpoUIText>
+          </Host>
+        </Measured>
       </ScrollView>
     </View>
   );
