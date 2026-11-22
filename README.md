@@ -85,3 +85,21 @@ React Native's `Text` multiplies both `fontSize` and `lineHeight` by the current
 unless `allowFontScaling={false}` is set, so the same style scales in one component and not in
 the other. Android's `TextView.kt` passes the values to Compose in `sp`, which scale, so the
 mismatch is iOS only.
+
+## Workaround
+
+Scale the size in JavaScript with the `fontScale` from `useWindowDimensions()`, which is what the
+last row does:
+
+```tsx
+const { fontScale } = useWindowDimensions();
+
+<Host matchContents>
+  <ExpoUIText textStyle={{ fontSize: 12 * fontScale, lineHeight: 20 * fontScale }}>
+    Twelve point text
+  </ExpoUIText>
+</Host>
+```
+
+The hook re-renders when the text size changes, so the row follows the setting live. It does not
+pick up `maxFontSizeMultiplier`, and it has to be repeated at every call site.
