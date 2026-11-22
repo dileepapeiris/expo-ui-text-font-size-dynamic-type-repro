@@ -58,3 +58,15 @@ opted out of font scaling, not the default React Native row. The `@expo/ui` row 
 `fontSize` scales, so Dynamic Type reaches the view; only the fixed size ignores it.
 
 Step log with timestamps: `media/bug-text-size.txt`.
+
+## Media
+
+Default text size on the left, XXX-large in the middle, accessibility XXX-large on the right:
+
+![Default, XXX-large and accessibility XXX-large side by side](media/text-size-side-by-side.png)
+
+![The sweep through five text sizes and back](media/bug-text-size.gif)
+
+Screen recording: `media/bug-text-size.mp4`.
+Per-step screenshots: `media/bug-text-size-0-large.png` through `media/bug-text-size-5-back-to-large.png`.
+Simulator and toolchain details: `media/simulator-ios-version.txt`.
