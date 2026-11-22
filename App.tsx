@@ -1,5 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
+import { ReactNode } from 'react';
 import { ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+
+function Measured({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <View style={styles.row}>
+      <View style={styles.measured}>{children}</View>
+      <Text style={styles.caption} allowFontScaling={false}>
+        {label}
+      </Text>
+    </View>
+  );
+}
 
 export default function App() {
   const { fontScale } = useWindowDimensions();
@@ -37,5 +49,15 @@ const styles = StyleSheet.create({
   scale: {
     fontSize: 15,
     color: '#444',
+  },
+  row: {
+    gap: 4,
+  },
+  measured: {
+    alignSelf: 'flex-start',
+  },
+  caption: {
+    fontSize: 12,
+    color: '#888',
   },
 });
