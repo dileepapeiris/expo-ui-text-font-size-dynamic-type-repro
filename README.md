@@ -23,3 +23,17 @@ xcrun simctl ui booted content_size large   # back to the default
 ```
 
 On a device: Settings > Accessibility > Display & Text Size > Larger Text.
+
+## What the screen shows
+
+The `fontScale` reported by `useWindowDimensions()`, then six rows with the same string. Under
+each row a fixed-size caption prints the row's `onLayout` width and height in points.
+
+| Row | Component | Expected on a larger text size |
+| --- | --- | --- |
+| RN Text, fontSize 12 | React Native `Text`, `style={{ fontSize: 12 }}` | Grows by `fontScale` (`allowFontScaling` default) |
+| RN Text, fontSize 12, allowFontScaling off | React Native `Text` with `allowFontScaling={false}` | Stays 12 pt, the opt-out |
+| @expo/ui Text, fontSize 12 | `@expo/ui` `Text`, `textStyle={{ fontSize: 12 }}` | Grows like the first row |
+| @expo/ui Text, fontSize 12, lineHeight 20 | same, two lines, `lineHeight: 20` | Grows, line spacing included |
+| @expo/ui Text, no fontSize | `@expo/ui` `Text` with no `textStyle` | Grows (SwiftUI body style) |
+| Workaround: fontSize 12 × fontScale | `textStyle={{ fontSize: 12 * fontScale }}` | Grows |
