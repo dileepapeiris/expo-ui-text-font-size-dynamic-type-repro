@@ -59,6 +59,29 @@ opted out of font scaling, not the default React Native row. The `@expo/ui` row 
 
 Step log with timestamps: `media/bug-text-size.txt`.
 
+### With the fix
+
+The same sweep on the same app with the change from the fix PR applied to
+`node_modules/@expo/ui` (the Swift sources under `ios/` and the compiled JavaScript under
+`build/`). Measured from `media/fixed-text-size-<step>.png`.
+
+| Row | large (1) | extra-large (1.118) | XXX-large (1.353) | AX medium (1.786) | AX XXX-large (3.571) |
+| --- | --- | --- | --- | --- | --- |
+| RN Text, fontSize 12 | 96 × 14 | 106 × 16 | 124 × 20 | 156 × 26 | 305 × 51 |
+| RN Text, fontSize 12, allowFontScaling off | 96 × 14 | 96 × 14 | 96 × 14 | 96 × 14 | 96 × 14 |
+| **@expo/ui Text, fontSize 12** | 96 × 14 | **103 × 16** | **121 × 19** | **141 × 22** | **241 × 40** |
+| **@expo/ui Text, fontSize 12, lineHeight 20** | 96 × 37 | **103 × 40** | **121 × 48** | **141 × 57** | **241 × 103** |
+| @expo/ui Text, no fontSize | 129 × 23 | 143 × 25 | 167 × 31 | 202 × 37 | 375 × 71 |
+| Workaround: fontSize 12 × fontScale | 96 × 14 | 114 × 18 | 156 × 26 | 237 × 40 | 842 × 144 |
+
+Both `@expo/ui` rows with a `fontSize` now grow with the text size, and the line spacing grows
+with the font. They scale by the SwiftUI body metrics, like the row with no `fontSize`, so at the
+accessibility sizes they are a little smaller than the React Native row, which uses React
+Native's own multipliers. The workaround row scales twice with the fix, once in JavaScript and
+once by Dynamic Type, so drop the workaround when the fix ships.
+
+Step log: `media/fixed-text-size.txt`.
+
 ## Media
 
 Default text size on the left, XXX-large in the middle, accessibility XXX-large on the right:
@@ -66,6 +89,16 @@ Default text size on the left, XXX-large in the middle, accessibility XXX-large 
 ![Default, XXX-large and accessibility XXX-large side by side](media/text-size-side-by-side.png)
 
 ![The sweep through five text sizes and back](media/bug-text-size.gif)
+
+Published package on the left, fixed on the right, at XXX-large and at accessibility XXX-large:
+
+![XXX-large, before and after the fix](media/extra-extra-extra-large-before-after.png)
+
+![Accessibility XXX-large, before and after the fix](media/accessibility-extra-extra-extra-large-before-after.png)
+
+![The sweep, before and after the fix](media/text-size-before-after.gif)
+
+Fixed run recording: `media/fixed-text-size.mp4`, screenshots `media/fixed-text-size-<step>.png`.
 
 Screen recording: `media/bug-text-size.mp4`.
 Per-step screenshots: `media/bug-text-size-0-large.png` through `media/bug-text-size-5-back-to-large.png`.
