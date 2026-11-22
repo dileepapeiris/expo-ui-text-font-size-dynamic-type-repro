@@ -1,0 +1,14 @@
+00:18:41  run bug-text-size on iPhone 17 Pro simulator (iOS 26.5)
+00:18:43  relaunch app at content size large
+00:18:56  screenshot bug-text-size-0-large.png
+00:18:56  xcrun simctl ui booted content_size extra-large
+00:19:01  screenshot bug-text-size-1-extra-large.png
+00:19:01  xcrun simctl ui booted content_size extra-extra-extra-large
+00:19:05  screenshot bug-text-size-2-extra-extra-extra-large.png
+00:19:05  xcrun simctl ui booted content_size accessibility-medium
+00:19:10  screenshot bug-text-size-3-accessibility-medium.png
+00:19:10  xcrun simctl ui booted content_size accessibility-extra-extra-extra-large
+00:19:14  screenshot bug-text-size-4-accessibility-extra-extra-extra-large.png
+00:19:15  xcrun simctl ui booted content_size large
+00:19:19  screenshot bug-text-size-5-back-to-large.png
+00:19:20  recording saved bug-text-size.mp4
