@@ -1,13 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { ReactNode } from 'react';
-import { ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { ReactNode, useState } from 'react';
+import { LayoutChangeEvent, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+
+type Size = { width: number; height: number };
 
 function Measured({ label, children }: { label: string; children: ReactNode }) {
+  const [size, setSize] = useState<Size | null>(null);
+  const onLayout = (e: LayoutChangeEvent) => setSize(e.nativeEvent.layout);
+  const measured = size ? ` · ${Math.round(size.width)} × ${Math.round(size.height)} pt` : '';
+
   return (
     <View style={styles.row}>
-      <View style={styles.measured}>{children}</View>
+      <View onLayout={onLayout} style={styles.measured}>
+        {children}
+      </View>
       <Text style={styles.caption} allowFontScaling={false}>
         {label}
+        {measured}
       </Text>
     </View>
   );
@@ -30,7 +39,6 @@ export default function App() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
