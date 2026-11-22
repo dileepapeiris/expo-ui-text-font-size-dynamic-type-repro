@@ -119,6 +119,14 @@ unless `allowFontScaling={false}` is set, so the same style scales in one compon
 the other. Android's `TextView.kt` passes the values to Compose in `sp`, which scale, so the
 mismatch is iOS only.
 
+## Fix
+
+https://github.com/expo/expo/pull/54011 scales a `font` modifier `size` relative to its `textStyle`
+for the system font with `UIFontMetrics` and the SwiftUI `dynamicTypeSize` environment, lets
+`lineSpacing` scale the same way, and has the universal `Text` pass `textStyle: 'body'` for its
+`fontSize`, `fontWeight` and `lineHeight`. The "With the fix" table above was recorded with that
+change applied.
+
 ## Workaround
 
 Scale the size in JavaScript with the `fontScale` from `useWindowDimensions()`, which is what the
