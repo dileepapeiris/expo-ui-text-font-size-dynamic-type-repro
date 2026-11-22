@@ -60,6 +60,12 @@ export default function App() {
             <ExpoUIText textStyle={{ fontSize: 12, lineHeight: 20 }}>{`${SAMPLE}\n${SAMPLE}`}</ExpoUIText>
           </Host>
         </Measured>
+
+        <Measured label="@expo/ui Text, no fontSize">
+          <Host matchContents>
+            <ExpoUIText>{SAMPLE}</ExpoUIText>
+          </Host>
+        </Measured>
       </ScrollView>
     </View>
   );
