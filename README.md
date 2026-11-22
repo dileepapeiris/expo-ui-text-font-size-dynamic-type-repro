@@ -37,3 +37,24 @@ each row a fixed-size caption prints the row's `onLayout` width and height in po
 | @expo/ui Text, fontSize 12, lineHeight 20 | same, two lines, `lineHeight: 20` | Grows, line spacing included |
 | @expo/ui Text, no fontSize | `@expo/ui` `Text` with no `textStyle` | Grows (SwiftUI body style) |
 | Workaround: fontSize 12 × fontScale | `textStyle={{ fontSize: 12 * fontScale }}` | Grows |
+
+## Result
+
+Measured `width × height` in points from `media/bug-text-size-<step>.png`, one text size per
+column. The text size was changed with `xcrun simctl ui` while the app stayed open; the app
+re-rendered on each change and `fontScale` updated.
+
+| Row | large (1) | extra-large (1.118) | XXX-large (1.353) | AX medium (1.786) | AX XXX-large (3.571) |
+| --- | --- | --- | --- | --- | --- |
+| RN Text, fontSize 12 | 96 × 14 | 106 × 16 | 124 × 20 | 156 × 26 | 305 × 51 |
+| RN Text, fontSize 12, allowFontScaling off | 96 × 14 | 96 × 14 | 96 × 14 | 96 × 14 | 96 × 14 |
+| **@expo/ui Text, fontSize 12** | 96 × 14 | **96 × 14** | **96 × 14** | **96 × 14** | **96 × 14** |
+| **@expo/ui Text, fontSize 12, lineHeight 20** | 96 × 37 | **96 × 37** | **96 × 37** | **96 × 37** | **96 × 37** |
+| @expo/ui Text, no fontSize | 129 × 23 | 143 × 25 | 167 × 31 | 202 × 37 | 375 × 71 |
+| Workaround: fontSize 12 × fontScale | 96 × 14 | 106 × 16 | 124 × 20 | 156 × 26 | 305 × 51 |
+
+The two `@expo/ui` rows with a `fontSize` never change. They match the React Native row that
+opted out of font scaling, not the default React Native row. The `@expo/ui` row with no
+`fontSize` scales, so Dynamic Type reaches the view; only the fixed size ignores it.
+
+Step log with timestamps: `media/bug-text-size.txt`.
