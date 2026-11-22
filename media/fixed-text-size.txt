@@ -1,0 +1,14 @@
+01:03:49  run fixed-text-size on iPhone 17 Pro simulator (iOS 26.5)
+01:03:51  relaunch app at content size large
+01:04:04  screenshot fixed-text-size-0-large.png
+01:04:04  xcrun simctl ui booted content_size extra-large
+01:04:09  screenshot fixed-text-size-1-extra-large.png
+01:04:09  xcrun simctl ui booted content_size extra-extra-extra-large
+01:04:13  screenshot fixed-text-size-2-extra-extra-extra-large.png
+01:04:14  xcrun simctl ui booted content_size accessibility-medium
+01:04:18  screenshot fixed-text-size-3-accessibility-medium.png
+01:04:18  xcrun simctl ui booted content_size accessibility-extra-extra-extra-large
+01:04:23  screenshot fixed-text-size-4-accessibility-extra-extra-extra-large.png
+01:04:23  xcrun simctl ui booted content_size large
+01:04:27  screenshot fixed-text-size-5-back-to-large.png
+01:04:28  recording saved fixed-text-size.mp4
